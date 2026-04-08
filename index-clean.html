@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tacos La Catrina | Cedar Park, TX</title>
+  <meta
+    name="description"
+    content="Authentic Mexican street tacos, birria, quesadillas, and aguas frescas in Cedar Park, Texas."
+  />
+
+  <style>
+    :root {
+      --bg: #fff7ef;
+      --bg-soft: #fff1df;
+      --card: rgba(255,255,255,0.72);
+      --text: #2a160f;
+      --muted: #73574a;
+      --primary: #d94f21;
+      --primary-2: #ff8b3d;
+      --accent: #f2b544;
+      --accent-2: #8a2e1c;
+      --line: rgba(110, 58, 35, 0.12);
+      --shadow: 0 20px 60px rgba(122, 54, 24, 0.14);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --nav-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 180, 79, 0.18), transparent 24%),
+        radial-gradient(circle at 90% 0%, rgba(217, 79, 33, 0.14), transparent 22%),
+        linear-gradient(180deg, #fff8f2 0%, #fff4e8 32%, #fff8f2 100%);
+      overflow-x: hidden;
+    }
+
+    body.menu-open { overflow: hidden; }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .top-glow,
+    .bottom-glow {
+      position: fixed;
+      width: 28rem;
+      height: 28rem;
+      border-radius: 999px;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.55;
+    }
+
+    .top-glow {
+      top: -8rem;
+      right: -8rem;
+      background: rgba(255, 168, 60, 0.34);
+    }
+
+    .bottom-glow {
+      bottom: -10rem;
+      left: -10rem;
+      background: rgba(217, 79, 33, 0.22);
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 247, 239, 0.72);
+      border-bottom: 1px solid rgba(117, 74, 52, 0.08);
+    }
+
+    .nav {
+      min-height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.45rem;
+      box-shadow: 0 12px 26px rgba(217, 79, 33, 0.25);
+      flex: 0 0 auto;
+    }
+
+    .brand-text {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 0.22rem;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .brand-sub {
+      font-size: 0.79rem;
+      color: var(--muted);
+      margin-top: 0.22rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      padding: 0.82rem 1rem;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.66);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      border: none;
+      border-radius: 999px;
+      padding: 0.96rem 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 14px 30px rgba(217, 79, 33, 0.23);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(125, 72, 46, 0.1);
+      box-shadow: 0 10px 24px rgba(117, 74, 52, 0.08);
+    }
+
+    .btn-ghost {
+      color: var(--primary);
+      background: rgba(255, 151, 63, 0.12);
+      border: 1px solid rgba(217, 79, 33, 0.14);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(125, 72, 46, 0.1);
+      background: rgba(255,255,255,0.8);
+      cursor: pointer;
+      position: relative;
+      padding: 0;
+    }
+
+    .menu-toggle span,
+    .menu-toggle::before,
+    .menu-toggle::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 999px;
+      transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+    }
+
+    .menu-toggle::before { top: 16px; }
+    .menu-toggle span { top: 23px; }
+    .menu-toggle::after { top: 30px; }
+
+    .menu-toggle.active::before {
+      top: 23px;
+      transform: rotate(45deg);
+    }
+
+    .menu-toggle.active span {
+      opacity: 0;
+    }
+
+    .menu-toggle.active::after {
+      top: 23px;
+      transform: rotate(-45deg);
+    }
+
+    .mobile-panel {
+      display: none;
+    }
+
+    .hero {
+      padding: 3.2rem 0 1.2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .hero-gallery,
+    .glass-card,
+    .menu-panel,
+    .review-card,
+    .cta-card,
+    .footer-card,
+    .food-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.72));
+      border: 1px solid rgba(128, 78, 51, 0.1);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-card {
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -5rem -7rem auto;
+      width: 18rem;
+      height: 18rem;
+      background: radial-gradient(circle, rgba(255, 171, 61, 0.18), transparent 68%);
+      pointer-events: none;
+    }
+
+    .hero-top {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.58rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(255, 152, 66, 0.12);
+      color: var(--accent-2);
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1px solid rgba(217, 79, 33, 0.08);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 5.3rem);
+      line-height: 0.95;
+      margin: 0;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #b63d17 0%, #ef6a27 42%, #f7a332 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      margin-top: 1.15rem;
+      font-size: 1.03rem;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 58ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.35rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.6rem;
+    }
+
+    .stat {
+      padding: 1rem;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(128, 78, 51, 0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .mini-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.35rem;
+    }
+
+    .mini-chip {
+      padding: 0.72rem 0.9rem;
+      border-radius: 16px;
+      background: rgba(255, 249, 243, 0.95);
+      border: 1px solid rgba(128, 78, 51, 0.08);
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hero-gallery {
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 0.9rem;
+      min-height: 620px;
+    }
+
+    .hero-main-image,
+    .hero-side-stack > div,
+    .food-image,
+    .menu-image,
+    .about-image,
+    .gallery-grid > button {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    .hero-main-image img,
+    .hero-side-stack img,
+    .food-image img,
+    .menu-image img,
+    .about-image img,
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-main-image:hover img,
+    .hero-side-stack > div:hover img,
+    .food-card:hover .food-image img,
+    .menu-image:hover img,
+    .about-image:hover img,
+    .gallery-grid > button:hover img {
+      transform: scale(1.06);
+    }
+
+    .hero-main-image::after,
+    .hero-side-stack > div::after,
+    .menu-image::after,
+    .about-image::after,
+    .gallery-grid > button::after,
+    .food-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(54, 22, 10, 0.4) 100%);
+      pointer-events: none;
+    }
+
+    .hero-main-label,
+    .image-tag {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      z-index: 2;
+      background: rgba(255,255,255,0.86);
+      color: var(--text);
+      padding: 0.6rem 0.82rem;
+      border-radius: 14px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+    }
+
+    .hero-side-stack {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.9rem;
+      min-height: 100%;
+    }
+
+    section {
+      padding: 1rem 0 0.9rem;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-head h2 {
+      margin: 0.2rem 0 0;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 42ch;
+      line-height: 1.7;
+    }
+
+    .food-grid,
+    .reviews-grid,
+    .hours-grid,
+    .footer-grid,
+    .gallery-grid,
+    .menu-layout,
+    .about-layout,
+    .cta-layout {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .food-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .food-card,
+    .review-card,
+    .glass-card,
+    .footer-card {
+      padding: 1rem;
+    }
+
+    .food-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,250,244,0.85));
+      border: 1px solid rgba(128, 78, 51, 0.08);
+      border-radius: 26px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      overflow: hidden;
+    }
+
+    .food-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(122, 54, 24, 0.18);
+    }
+
+    .food-image {
+      height: 220px;
+    }
+
+    .price-tag {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.85rem;
+      z-index: 2;
+      padding: 0.55rem 0.72rem;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.94);
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .food-card h3 {
+      margin: 1rem 0 0.45rem;
+      font-size: 1.2rem;
+    }
+
+    .food-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .menu-layout {
+      grid-template-columns: 0.96fr 1.04fr;
+      align-items: stretch;
+    }
+
+    .menu-image,
+    .about-image {
+      min-height: 100%;
+      box-shadow: var(--shadow);
+    }
+
+    .menu-panel {
+      padding: 1.25rem;
+    }
+
+    .menu-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .menu-top h3,
+    .about-copy h3,
+    .cta-copy h3 {
+      margin: 0;
+      font-size: 1.6rem;
+      line-height: 1.05;
+    }
+
+    .menu-group {
+      padding: 1rem 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .menu-group:first-of-type {
+      border-top: 0;
+      padding-top: 0.2rem;
+    }
+
+    .menu-group-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-group-title strong {
+      font-size: 1.12rem;
+    }
+
+    .menu-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .menu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding: 0.85rem 0;
+      border-bottom: 1px dashed rgba(110, 58, 35, 0.12);
+    }
+
+    .menu-item:last-child {
+      border-bottom: 0;
+    }
+
+    .menu-item strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .menu-item span {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.93rem;
+    }
+
+    .menu-item b {
+      font-size: 0.98rem;
+      white-space: nowrap;
+      color: var(--accent-2);
+    }
+
+    .about-layout {
+      grid-template-columns: 0.92fr 1.08fr;
+      align-items: stretch;
+    }
+
+    .about-image {
+      min-height: 460px;
+    }
+
+    .glass-card {
+      padding: 1.5rem;
+    }
+
+    .about-copy p,
+    .cta-copy p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin: 0.9rem 0 0;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .feature {
+      display: flex;
+      gap: 0.85rem;
+      align-items: start;
+      padding: 0.95rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(128, 78, 51, 0.08);
+    }
+
+    .feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      background: linear-gradient(135deg, rgba(217,79,33,0.13), rgba(255,171,61,0.24));
+    }
+
+    .feature strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature span {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.94rem;
+    }
+
+    .reviews-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .review-card {
+      min-height: 100%;
+      position: relative;
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      box-shadow: 0 10px 22px rgba(217, 79, 33, 0.2);
+    }
+
+    .reviewer strong {
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .reviewer span,
+    .stars {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .review-card p {
+      margin: 0;
+      color: var(--text);
+      line-height: 1.85;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .gallery-grid > button {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      height: 280px;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+    }
+
+    .hours-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+    }
+
+    .hours-list {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 1rem;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(128, 78, 51, 0.08);
+      border-radius: 18px;
+    }
+
+    .hours-row span {
+      color: var(--muted);
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: start;
+      gap: 0.85rem;
+      padding: 1rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(128, 78, 51, 0.08);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(217,79,33,0.14), rgba(242,181,68,0.26));
+      flex: 0 0 auto;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-item span,
+    .contact-item a {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cta-layout {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .cta-card {
+      padding: 1.4rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .cta-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -6rem -5rem auto;
+      width: 16rem;
+      height: 16rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 171, 61, 0.24), transparent 64%);
+      pointer-events: none;
+    }
+
+    .cta-copy {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer {
+      padding: 0.9rem 0 2rem;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+    }
+
+    .footer-card h4 {
+      margin: 0 0 0.9rem;
+      font-size: 1rem;
+    }
+
+    .footer-card p,
+    .footer-card a,
+    .footer-card li {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: transform, opacity;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(35, 15, 7, 0.74);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1200;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-inner {
+      width: min(980px, 100%);
+      max-height: 92vh;
+      border-radius: 30px;
+      overflow: hidden;
+      background: #fff9f3;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    .modal-inner img {
+      width: 100%;
+      max-height: 76vh;
+      object-fit: cover;
+    }
+
+    .modal-caption {
+      padding: 1rem 1.15rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 0;
+      background: rgba(255,255,255,0.88);
+      cursor: pointer;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .menu-layout,
+      .about-layout,
+      .cta-layout,
+      .hours-grid,
+      .footer-grid,
+      .food-grid,
+      .reviews-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .food-grid,
+      .reviews-grid,
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-card,
+      .hero-gallery {
+        min-height: unset;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .menu-toggle {
+        display: inline-block;
+      }
+
+      .nav-links,
+      .nav-actions .btn-secondary,
+      .nav-actions .btn-primary {
+        display: none;
+      }
+
+      .mobile-panel {
+        position: fixed;
+        top: calc(var(--nav-h) + 0.5rem);
+        left: 1rem;
+        right: 1rem;
+        background: rgba(255, 248, 241, 0.98);
+        border: 1px solid rgba(128, 78, 51, 0.1);
+        border-radius: 28px;
+        box-shadow: 0 24px 60px rgba(98, 47, 25, 0.18);
+        padding: 1rem;
+        z-index: 999;
+      }
+
+      .mobile-panel.open {
+        display: block;
+      }
+
+      .mobile-links {
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .mobile-links a,
+      .mobile-links .btn {
+        width: 100%;
+      }
+
+      .hero-grid,
+      .menu-layout,
+      .about-layout,
+      .cta-layout,
+      .hours-grid,
+      .footer-grid,
+      .hero-gallery,
+      .hero-stats,
+      .food-grid,
+      .reviews-grid,
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 1.5rem;
+      }
+
+      .hero-card {
+        padding: 1.35rem;
+      }
+
+      .hero-gallery {
+        min-height: auto;
+      }
+
+      .hero-main-image {
+        min-height: 360px;
+      }
+
+      .hero-side-stack > div,
+      .gallery-grid > button {
+        height: 260px;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .container {
+        width: min(100% - 1rem, 1180px);
+      }
+
+      .brand-title {
+        white-space: normal;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-copy {
+        font-size: 0.98rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .food-image,
+      .about-image,
+      .gallery-grid > button,
+      .hero-main-image,
+      .hero-side-stack > div {
+        height: 230px;
+      }
+
+      .menu-panel,
+      .glass-card,
+      .cta-card,
+      .footer-card,
+      .review-card,
+      .food-card {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-glow"></div>
+  <div class="bottom-glow"></div>
+
+  <header class="site-header">
+  <div class="container nav">
+    <a href="#home" class="brand">
+      <div class="brand-badge">☀</div>
+      <div class="brand-text">
+        <div class="eyebrow">Cedar Park, Texas</div>
+        <div class="brand-title">Tacos La Catrina</div>
+        <div class="brand-sub">Authentic Mexican street flavor</div>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#menu">Menu</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#location">Location</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-secondary" href="tel:8329518779">Call Now</a>
+      <a class="btn btn-primary" href="https://maps.google.com/?q=2301+Brushy+Creek+Rd+Cedar+Park+TX+78613" target="_blank" rel="noopener">Get Directions</a>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container mobile-panel" id="mobilePanel">
+    <div class="mobile-links">
+      <a class="btn btn-secondary" href="#menu">Menu</a>
+      <a class="btn btn-secondary" href="#about">About</a>
+      <a class="btn btn-secondary" href="#reviews">Reviews</a>
+      <a class="btn btn-secondary" href="#gallery">Gallery</a>
+      <a class="btn btn-secondary" href="#location">Location</a>
+      <a class="btn btn-ghost" href="tel:8329518779">Call (832) 951-8779</a>
+      <a class="btn btn-primary" href="https://maps.google.com/?q=2301+Brushy+Creek+Rd+Cedar+Park+TX+78613" target="_blank" rel="noopener">Open Maps</a>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+
+    <!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+
+    <!-- LEFT SIDE -->
+    <div class="hero-card reveal">
+      <div>
+        <div class="hero-top">
+          <div class="pill">⭐ 4.7 Rating</div>
+          <div class="pill">$10–20</div>
+          <div class="pill">Food Truck</div>
+        </div>
+
+        <h1>
+          Real <span class="gradient-text">Mexican Street</span><br />
+          Flavor in Cedar Park
+        </h1>
+
+        <p class="hero-copy">
+          Serving up authentic birria tacos, quesadillas, and street-style favorites made fresh daily.
+          One of Cedar Park’s hidden gems for real Mexican food.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="tel:8329518779">Call Now</a>
+          <a class="btn btn-secondary" href="#menu">View Menu</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>4.7★</strong>
+            <span>Google Rating</span>
+          </div>
+          <div class="stat">
+            <strong>300+</strong>
+            <span>Reviews</span>
+          </div>
+          <div class="stat">
+            <strong>11AM–8PM</strong>
+            <span>Open Daily</span>
+          </div>
+        </div>
+
+        <div class="mini-info">
+          <div class="mini-chip">Outdoor seating</div>
+          <div class="mini-chip">Pickup available</div>
+          <div class="mini-chip">Delivery options</div>
+          <div class="mini-chip">No reservations</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE IMAGES -->
+    <div class="hero-gallery reveal">
+
+      <div class="hero-main-image">
+        <img src="taco1.jpg" alt="Birria tacos" />
+        <div class="hero-main-label">Authentic Flavor</div>
+      </div>
+
+      <div class="hero-side-stack">
+        <div>
+          <img src="taco2.jpg" alt="Quesadilla" />
+          <div class="image-tag">Quesadillas</div>
+        </div>
+        <div>
+          <img src="taco3.jpg" alt="Street tacos" />
+          <div class="image-tag">Street Tacos</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- POPULAR ITEMS -->
+<section id="popular">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Customer favorites</div>
+        <h2>Popular picks everyone talks about.</h2>
+      </div>
+      <p>
+        From rich birria tacos to cheesy quesadillas, these are the items that make people come back.
+      </p>
+    </div>
+
+    <div class="food-grid">
+
+      <article class="food-card reveal">
+        <div class="food-image">
+          <img src="taco1.jpg" alt="Birria tacos" />
+          <div class="price-tag">$13.99</div>
+        </div>
+        <h3>Birria Tacos</h3>
+        <p>
+          Slow-cooked beef tacos packed with rich flavor and served with consommé for dipping.
+        </p>
+      </article>
+
+      <article class="food-card reveal">
+        <div class="food-image">
+          <img src="taco2.jpg" alt="Quesadilla" />
+          <div class="price-tag">$14.99</div>
+        </div>
+        <h3>Quesadilla</h3>
+        <p>
+          Crispy grilled tortilla loaded with melty cheese and bold, authentic street-style flavor.
+        </p>
+      </article>
+
+      <article class="food-card reveal">
+        <div class="food-image">
+          <img src="taco3.jpg" alt="Street tacos" />
+          <div class="price-tag">$12.99</div>
+        </div>
+        <h3>Street Tacos</h3>
+        <p>
+          Freshly made tacos topped with onions, cilantro, and real Mexican flavor in every bite.
+        </p>
+      </article>
+
+      <article class="food-card reveal">
+        <div class="food-image">
+          <img src="drink1.jpg" alt="Mexican drinks" />
+          <div class="price-tag">$3.50</div>
+        </div>
+        <h3>Drinks</h3>
+        <p>
+          Cool off with refreshing drinks that pair perfectly with tacos, quesadillas, and more.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="container menu-layout">
+
+    <!-- IMAGE -->
+    <div class="menu-image reveal">
+      <img src="taco4.jpg" alt="Taco platter" />
+    </div>
+
+    <!-- MENU CONTENT -->
+    <div class="menu-panel reveal">
+      <div class="menu-top">
+        <div>
+          <div class="eyebrow">Menu</div>
+          <h3>Simple. Authentic. Fire.</h3>
+        </div>
+        <a class="btn btn-ghost" href="tel:8329518779">Call to Order</a>
+      </div>
+
+      <!-- TACOS -->
+      <div class="menu-group">
+        <div class="menu-group-title">
+          <strong>Tacos</strong>
+          <span>All day</span>
+        </div>
+
+        <div class="menu-list">
+          <div class="menu-item">
+            <div>
+              <strong>Birria Taco</strong>
+              <span>Slow cooked beef with consommé</span>
+            </div>
+            <b>$3.99</b>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <strong>Quesabirria Tacos</strong>
+              <span>Birria + melted cheese combo</span>
+            </div>
+            <b>$13.99</b>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <strong>Fajita Street Tacos</strong>
+              <span>Grilled steak with onions + cilantro</span>
+            </div>
+            <b>$14.50</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUESADILLAS -->
+      <div class="menu-group">
+        <div class="menu-group-title">
+          <strong>Quesadillas</strong>
+          <span>12 inch</span>
+        </div>
+
+        <div class="menu-list">
+          <div class="menu-item">
+            <div>
+              <strong>Cheese Quesadilla</strong>
+              <span>Classic melted cheese</span>
+            </div>
+            <b>$8.99</b>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <strong>Steak Quesadilla</strong>
+              <span>Grilled steak + cheese</span>
+            </div>
+            <b>$15.50</b>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <strong>Birria Quesadilla</strong>
+              <span>Loaded birria + consommé</span>
+            </div>
+            <b>$14.99</b>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRINKS -->
+      <div class="menu-group">
+        <div class="menu-group-title">
+          <strong>Drinks</strong>
+          <span>Cold</span>
+        </div>
+
+        <div class="menu-list">
+          <div class="menu-item">
+            <div>
+              <strong>Soft Drinks</strong>
+              <span>Coke, Sprite, Dr Pepper</span>
+            </div>
+            <b>$2.75</b>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <strong>Jarritos</strong>
+              <span>Authentic Mexican soda</span>
+            </div>
+            <b>$3.25</b>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-layout">
+
+    <div class="glass-card reveal about-copy">
+      <div class="eyebrow">About us</div>
+      <h3>Authentic street flavor, made with heart.</h3>
+
+      <p>
+        Tacos La Catrina brings bold Mexican street food to Cedar Park with fresh ingredients,
+        rich flavor, and the kind of meals people keep thinking about after they leave.
+      </p>
+
+      <p>
+        From birria tacos and quesadillas to refreshing drinks and quick service, this spot delivers
+        the kind of real flavor that keeps locals coming back.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature">
+          <div class="feature-icon">🌮</div>
+          <div>
+            <strong>Authentic recipes</strong>
+            <span>Street-style Mexican food made with bold, traditional flavor.</span>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <div>
+            <strong>Fast service</strong>
+            <span>Perfect for lunch, dinner, or quick pickup without losing quality.</span>
+          </div>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">❤️</div>
+          <div>
+            <strong>Local favorite</strong>
+            <span>A hidden gem in Cedar Park with strong reviews and loyal regulars.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-image reveal">
+      <img src="taco5.jpg" alt="Food truck or mexican food spread" />
+      <div class="image-tag">Fresh. Bold. Real.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Reviews</div>
+        <h2>What customers are saying.</h2>
+      </div>
+      <p>
+        Real feedback from people who keep coming back for the flavor.
+      </p>
+    </div>
+
+    <div class="reviews-grid">
+
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="reviewer">
+            <div class="avatar">A</div>
+            <div>
+              <strong>Local Customer</strong>
+              <span>Google Review</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p>
+          “The birria tacos are insane. Definitely one of the best taco spots in Cedar Park.”
+        </p>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="reviewer">
+            <div class="avatar">M</div>
+            <div>
+              <strong>Regular</strong>
+              <span>Google Review</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p>
+          “Super flavorful food, great portions, and quick service. I come here all the time.”
+        </p>
+      </div>
+
+      <div class="review-card reveal">
+        <div class="review-top">
+          <div class="reviewer">
+            <div class="avatar">J</div>
+            <div>
+              <strong>First Time Visitor</strong>
+              <span>Google Review</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p>
+          “Didn’t expect it to be this good. The quesadilla and tacos were both fire.”
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Gallery</div>
+        <h2>See what you're missing.</h2>
+      </div>
+      <p>
+        Fresh, bold, and made to look as good as it tastes.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <button class="reveal" data-image="taco1.jpg" data-caption="Birria tacos">
+        <img src="taco1.jpg" />
+        <div class="image-tag">Birria</div>
+      </button>
+
+      <button class="reveal" data-image="taco2.jpg" data-caption="Quesadilla">
+        <img src="taco2.jpg" />
+        <div class="image-tag">Quesadilla</div>
+      </button>
+
+      <button class="reveal" data-image="taco3.jpg" data-caption="Street tacos">
+        <img src="taco3.jpg" />
+        <div class="image-tag">Street tacos</div>
+      </button>
+
+      <button class="reveal" data-image="taco4.jpg" data-caption="Taco platter">
+        <img src="taco4.jpg" />
+        <div class="image-tag">Plates</div>
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- LOCATION + CTA -->
+<section id="location">
+  <div class="container hours-grid">
+
+    <!-- LOCATION -->
+    <div class="glass-card reveal">
+      <div class="eyebrow">Location</div>
+      <h3>Come visit us.</h3>
+
+      <div class="contact-list">
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <strong>Address</strong>
+            <span>2301 Brushy Creek Rd, Cedar Park, TX</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Phone</strong>
+            <a href="tel:8329518779">(832) 951-8779</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">🛵</div>
+          <div>
+            <strong>Options</strong>
+            <span>Pickup, delivery, outdoor seating</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- HOURS -->
+    <div class="glass-card reveal">
+      <div class="eyebrow">Hours</div>
+      <h3>Open daily.</h3>
+
+      <div class="hours-list">
+        <div class="hours-row"><strong>Monday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Tuesday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Wednesday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Thursday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Friday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Saturday</strong><span>11AM – 8PM</span></div>
+        <div class="hours-row"><strong>Sunday</strong><span>11AM – 8PM</span></div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="container cta-layout">
+
+    <div class="cta-card reveal">
+      <div class="cta-copy">
+        <div class="eyebrow">Ready?</div>
+        <h3>Order now or stop by today.</h3>
+
+        <p>
+          One of Cedar Park’s best taco spots — fresh food, fast service, and real flavor.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="tel:8329518779">Call Now</a>
+          <a class="btn btn-secondary" href="https://maps.google.com/?q=2301+Brushy+Creek+Rd+Cedar+Park+TX" target="_blank">Directions</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-card reveal">
+      <div class="eyebrow">Why this works</div>
+      <h3>Built to bring in more customers.</h3>
+
+      <p>
+        This layout is designed for mobile users — quick menu access, strong visuals,
+        and easy actions like calling or getting directions.
+      </p>
+
+      <p>
+        It turns people searching on Google into actual paying customers.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-grid">
+    <div class="footer-card reveal">
+      <h4>Tacos La Catrina</h4>
+      <p>Authentic Mexican street food in Cedar Park, TX.</p>
+    </div>
+
+    <div class="footer-card reveal">
+      <h4>Contact</h4>
+      <p><a href="tel:8329518779">(832) 951-8779</a></p>
+      <p>
+        <a href="https://maps.google.com/?q=2301+Brushy+Creek+Rd+Cedar+Park+TX" target="_blank">
+          2301 Brushy Creek Rd, Cedar Park, TX
+        </a>
+      </p>
+    </div>
+
+    <div class="footer-card reveal">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    Demo website concept
+  </div>
+</footer>
+
+<!-- IMAGE MODAL -->
+<div class="modal" id="imageModal">
+  <div class="modal-inner">
+    <button class="modal-close" id="modalClose">×</button>
+    <img id="modalImage" src="" />
+    <div class="modal-caption">
+      <strong id="modalCaption">Image</strong>
+      <span>Click outside to close</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // mobile menu
+  const menuToggle = document.querySelector('.menu-toggle');
+  const mobilePanel = document.getElementById('mobilePanel');
+
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      mobilePanel.classList.toggle('open');
+      menuToggle.classList.toggle('active');
+    });
+  }
+
+  // reveal animation
+  const reveals = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // image modal
+  const modal = document.getElementById('imageModal');
+  const modalImg = document.getElementById('modalImage');
+  const modalCaption = document.getElementById('modalCaption');
+  const modalClose = document.getElementById('modalClose');
+
+  document.querySelectorAll('[data-image]').forEach(el => {
+    el.addEventListener('click', () => {
+      modal.classList.add('open');
+      modalImg.src = el.dataset.image;
+      modalCaption.textContent = el.dataset.caption;
+    });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modal.classList.remove('open');
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>
